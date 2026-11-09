@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AttendEase | Cloud Attendance</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#"><span class="brand-mark">✓</span><span>AttendEase</span></a>
+      <span class="top-caption">CLOUD ATTENDANCE SYSTEM</span>
+      <button id="logoutBtn" class="btn btn-outline hidden">Log out</button>
+    </header>
+    <main>
+      <section id="authView" class="auth-layout">
+        <div class="hero-panel">
+          <div class="hero-icon">☁</div>
+          <p class="eyebrow">SIMPLE • SECURE • ONLINE</p>
+          <h1>Attendance,<br><span>made simple.</span></h1>
+          <p class="hero-copy">Manage students, mark daily attendance, and review records from one place.</p>
+          <div class="hero-points"><span>✓ Cloud database</span><span>✓ Daily records</span><span>✓ Easy reports</span></div>
+        </div>
+        <div class="auth-card">
+          <div class="auth-heading"><p class="eyebrow">WELCOME</p><h2 id="authTitle">Sign in to your account</h2><p id="authSubtitle">Use your email and password to continue.</p></div>
+          <form id="authForm">
+            <label for="email">Email address</label><input id="email" type="email" placeholder="you@example.com" required autocomplete="email" />
+            <label for="password">Password</label><input id="password" type="password" placeholder="At least 6 characters" required minlength="6" autocomplete="current-password" />
+            <button id="authSubmit" class="btn btn-primary full" type="submit">Sign in</button>
+          </form>
+          <p class="switch-auth"><span id="switchText">New here?</span> <button id="switchAuth" class="text-btn" type="button">Create an account</button></p>
+          <p id="authMessage" class="message" aria-live="polite"></p>
+        </div>
+      </section>
+
+      <section id="dashboardView" class="hidden">
+        <div class="welcome-row">
+          <div><p class="eyebrow">OVERVIEW</p><h1>Attendance dashboard</h1><p class="muted">Manage your class attendance in one place.</p></div>
+          <div class="date-chip"><span>Today</span><strong id="todayLabel">—</strong></div>
+        </div>
+        <div class="stats-grid">
+          <article class="stat-card"><div class="stat-icon purple">♙</div><p>Total students</p><strong id="totalStudents">0</strong></article>
+          <article class="stat-card"><div class="stat-icon green">✓</div><p>Present today</p><strong id="presentCount">0</strong></article>
+          <article class="stat-card"><div class="stat-icon orange">−</div><p>Absent today</p><strong id="absentCount">0</strong></article>
+          <article class="stat-card"><div class="stat-icon blue">%</div><p>Attendance rate</p><strong id="attendanceRate">0%</strong></article>
+        </div>
+        <div class="content-grid">
+          <section class="panel">
+            <div class="panel-heading"><div><p class="eyebrow">CLASS LIST</p><h2>Students</h2></div><span class="small-pill" id="studentPill">0 students</span></div>
+            <form id="addStudentForm" class="add-student-form">
+              <input id="studentName" type="text" placeholder="Student full name" maxlength="70" required />
+              <input id="studentRoll" type="text" placeholder="Roll number" maxlength="20" required />
+              <button class="btn btn-primary" type="submit">+ Add student</button>
+            </form>
+            <div class="table-wrap"><table><thead><tr><th>Student</th><th>Roll no.</th><th>Today's status</th><th></th></tr></thead><tbody id="studentRows"></tbody></table></div>
+            <p id="studentEmpty" class="empty-state">No students added yet. Add your first student above.</p>
+          </section>
+          <section class="panel mark-panel">
+            <div class="panel-heading"><div><p class="eyebrow">DAILY REGISTER</p><h2>Mark attendance</h2></div></div>
+            <label class="date-label" for="attendanceDate">Select date</label><input id="attendanceDate" type="date" />
+            <div id="markList" class="mark-list"></div>
+            <button id="saveAttendance" class="btn btn-primary full" type="button">Save attendance</button>
+            <p id="attendanceMessage" class="message" aria-live="polite"></p>
+          </section>
+        </div>
+        <section class="panel history-panel">
+          <div class="panel-heading"><div><p class="eyebrow">RECORDS</p><h2>Attendance history</h2></div><button id="refreshHistory" class="btn btn-outline">Refresh</button></div>
+          <div class="table-wrap"><table><thead><tr><th>Date</th><th>Present</th><th>Absent</th><th>Total marked</th><th>Rate</th></tr></thead><tbody id="historyRows"></tbody></table></div>
+          <p id="historyEmpty" class="empty-state">No attendance records saved yet.</p>
+        </section>
+        <p class="footer-note">AttendEase · Student attendance management · Powered by Supabase</p>
+      </section>
+    </main>
+  </div>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
